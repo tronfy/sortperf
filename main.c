@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
 
 #include "sort/heap.c"
 #include "sort/insertion.c"
@@ -39,6 +40,7 @@ void run_time_single(void (*sort)(int *, int), int **bases, int t, int n,
         times[i] = clocks;
         printf(" %ld", clocks);
         fflush(stdout);
+        sleep(1);
     }
     printf("\n");
 
@@ -52,6 +54,7 @@ void run_time_all(int t, int n, bool last) {
     for (int i = 0; i < t; i++) {
         bases[i] = malloc(sizeof(int) * n);
         generate_array(bases[i], n);
+        sleep(1);
     }
 
     printf("n = %d\n", n);
