@@ -28,12 +28,8 @@ clock_t count_clocks(void (*sort)(int *, int), int *arr, int n) {
     return end - start;
 }
 
-void run_time_single(void (*sort)(int *, int),
-                     int **bases,
-                     int t,
-                     int n,
-                     char *algo,
-                     bool last) {
+void run_time_single(void (*sort)(int *, int), int **bases, int t, int n,
+                     char *algo, bool last) {
     int times[t];
 
     for (int i = 0; i < t; i++) {

@@ -1,4 +1,7 @@
 {
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  }
 }
