@@ -19,6 +19,8 @@ To maintain fairness, the following measures were taken:
 
 ## Results
 
+### Individual algorithms
+
 ![Insertion Sort Results](out/insertion.png)
 
 ![Selection Sort Results](out/selection.png)
@@ -28,3 +30,9 @@ To maintain fairness, the following measures were taken:
 ![Heap Sort Results](out/heap.png)
 
 ![Quick Sort Results](out/quick.png)
+
+### Algorithms comparison
+
+![Quadratic Algorithms](out/quadratic.png)
+
+![Logarithmic Algorithms](out/nlogn.png)
