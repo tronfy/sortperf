@@ -14,3 +14,16 @@ To maintain fairness, the following measures were taken:
   - run timing tests for each sorting algorithm using each of the `t` arrays;
   - take the average between the `t` measurements for each (algorithm, `n`) result set.
 - When plotting results, we also plot the theoretical complexity as a dotted line, fitted to match the results for the highest value of `n`. (`plot_t = measured[-1] / theoretical[-1]`)
+
+
+## Results
+
+![Insertion Sort Results](out/insertion.png)
+
+![Selection Sort Results](out/selection.png)
+
+![Merge Sort Results](out/merge.png)
+
+![Heap Sort Results](out/heap.png)
+
+![Quick Sort Results](out/quick.png)
