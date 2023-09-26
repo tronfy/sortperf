@@ -1,12 +1,5 @@
 #include <stdio.h>
- 
-// Function to swap two elements
-void swap(int* a, int* b)
-{
-    int t = *a;
-    *a = *b;
-    *b = t;
-}
+#include "_common.c"
  
 // Partition the array using the last element as the pivot
 int partition(int arr[], int low, int high)
