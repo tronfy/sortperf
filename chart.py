@@ -32,10 +32,10 @@ def plot(algo, theoretical, theo_label, data):
 
     ax.grid()
 
-    fig.savefig(f"charts/{algo}.png")
+    fig.savefig(f"out/{algo}.png")
 
 
-with open('data.json') as f:
+with open('out/data.json') as f:
     data = json.load(f)
     x = np.array([int(i) for i in data.keys()])
 
