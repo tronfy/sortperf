@@ -44,13 +44,12 @@ void clone_array(int *arr1, int *arr2, int n) {
     }
 }
 
-// TODO: run t tests with different arrays
 // TODO: save times to file
-void run_t_tests_for_avg(void (*sort)(int *, int), int **arr, int t, int n) {
+void run_t_tests_for_avg(void (*sort)(int *, int), int **bases, int t, int n) {
     clock_t sum = 0;
     for (int i = 0; i < t; i++) {
         int a[n];
-        clone_array(arr, a, n);
+        clone_array(bases[i], a, n);
         clock_t clocks = measure_time(sort, a, n);
         sum += clocks;
         printf(" %ld", clocks);
@@ -60,7 +59,6 @@ void run_t_tests_for_avg(void (*sort)(int *, int), int **arr, int t, int n) {
     clock_t avg = sum / t;
     double avg_seconds = (double) sum / CLOCKS_PER_SEC / t;
     printf(" | avg: %ld (%.3fs)\n", avg, avg_seconds);
-
 }
 
 void run_tests_for_n(int n) {

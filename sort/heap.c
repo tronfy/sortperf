@@ -1,32 +1,36 @@
-void heap_sort(int *arr, int n) {
-    int i, j, k, temp;
-    for (i = 1; i < n; i++) {
-        k = i;
-        do {
-            j = (k - 1) / 2;
-            if (arr[j] < arr[k]) {
-                temp = arr[j];
-                arr[j] = arr[k];
-                arr[k] = temp;
-            }
-            k = j;
-        } while (k != 0);
+void heapify(int *arr, int n, int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    // if left child is larger than root
+    if (left < n && arr[left] > arr[largest])
+        largest = left;
+
+    // if right child is larger than largest so far
+    if (right < n && arr[right] > arr[largest])
+        largest = right;
+
+    // if largest is not root
+    if (largest != i) {
+        swap(&arr[i], &arr[largest]);
+
+        // recursively heapify the affected sub-tree
+        heapify(arr, n, largest);
     }
-    for (i = n - 1; i >= 0; i--) {
-        temp = arr[0];
-        arr[0] = arr[i];
-        arr[i] = temp;
-        k = 0;
-        do {
-            j = 2 * k + 1;
-            if ((arr[j] < arr[j + 1]) && j < (i - 1))
-                j++;
-            if (arr[k] < arr[j] && j < i) {
-                temp = arr[k];
-                arr[k] = arr[j];
-                arr[j] = temp;
-            }
-            k = j;
-        } while (j < i);
+}
+
+void heap_sort(int *arr, int n) {
+    // build heap (rearrange array)
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
+
+    // one by one extract an element from heap
+    for (int i = n - 1; i >= 0; i--) {
+        // move current root to end
+        swap(&arr[0], &arr[i]);
+
+        // call max heapify on the reduced heap
+        heapify(arr, i, 0);
     }
 }
