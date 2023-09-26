@@ -1,11 +1,6 @@
-
-import os
 import json
 import matplotlib.pyplot as plt
 import numpy as np
-
-if not os.path.exists('charts'):
-    os.makedirs('charts')
 
 
 def plot(algo, theoretical, theo_label, data):
@@ -14,25 +9,26 @@ def plot(algo, theoretical, theo_label, data):
     measured = np.array([data[i][algo] for i in data.keys()])
     measured_avg = np.array([np.mean(data[i][algo]) for i in data.keys()])
     
-    # adjust theoretical to fit measured, consider lowest and highest n
+    # adjust theoretical to fit measured, consider highest n
     mult = (measured_avg[-1] / theoretical[-1])
     theoretical = theoretical * mult
 
-    theo_name = f"teórico ({theo_label} * {mult:.2e})"
+    theo_name = f"theoretical: {theo_label} * ({mult:.2e})"
 
     fig, ax = plt.subplots()
-    plt.plot(x, measured_avg, label='medido (média)', linewidth=2)
-    plt.plot(x, theoretical, label=theo_name, linestyle=':')
-    ax.set(xlabel='n', ylabel='tempo (clocks)',
+    plt.plot(x, measured_avg, label='measured (avg)', linewidth=2)
+    plt.plot(x, theoretical, label=theo_name, linestyle='dotted', linewidth=2)
+    ax.set(xlabel='n', ylabel='time (clock cycles)',
            title=f"{algo.capitalize()} Sort")
     
     ax.legend()
 
-    plt.plot(x, measured, 'ko', label='medido', markersize=1)
+    plt.plot(x, measured, 'ko', markersize=1)
 
     ax.grid()
 
-    fig.savefig(f"out/{algo}.png")
+    fig.set_size_inches(7, 5)
+    fig.savefig(f"out/{algo}.png", dpi=300)
 
 
 with open('out/data.json') as f:
