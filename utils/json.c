@@ -4,6 +4,7 @@
 #define DIRNAME "out"
 #define FILENAME "out/data.json"
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -36,8 +37,10 @@ void json_begin_time(int n) {
 
 void json_end_time(bool last) {
     FILE *file = fopen(FILENAME, "a");
-    if (!last) fprintf(file, "\t},\n");
-    else fprintf(file, "\t}\n");
+    if (!last)
+        fprintf(file, "\t},\n");
+    else
+        fprintf(file, "\t}\n");
     fclose(file);
 }
 
@@ -49,8 +52,10 @@ void json_save_times(int *times, int t, char *label, bool last) {
         fprintf(file, "%d", times[i]);
         if (i < t - 1) fprintf(file, ", ");
     }
-    if (!last) fprintf(file, "],\n");
-    else fprintf(file, "]\n");
+    if (!last)
+        fprintf(file, "],\n");
+    else
+        fprintf(file, "]\n");
     fclose(file);
 }
 
