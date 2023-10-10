@@ -53,7 +53,8 @@ void run_time_all(int t, int n, bool last) {
     int *bases[t];
     for (int i = 0; i < t; i++) {
         bases[i] = malloc(sizeof(int) * n);
-        generate_array(bases[i], n);
+        // gen_random_array(bases[i], n);
+        gen_sorted_array(bases[i], n);
         sleep(1);
     }
 
@@ -91,7 +92,7 @@ void run_time_all(int t, int n, bool last) {
 int main() {
     json_begin();
 
-    int m = 30; // max n multiplier
+    int m = 15; // max n multiplier
     int t = 5;  // test t arrays per n
 
     for (int i = 1; i <= m; i++) {

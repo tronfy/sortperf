@@ -3,9 +3,16 @@
 
 #include <stdbool.h>
 
-void generate_array(int *arr, int n) {
+void gen_random_array(int *arr, int n) {
     for (int i = 0; i < n; i++) {
         arr[i] = rand() % n;
+    }
+}
+
+void gen_sorted_array(int *arr, int n) {
+    for (int i = 0; i < n; i++) {
+        arr[i] = i;
+        // arr[i] = n - i;
     }
 }
 
