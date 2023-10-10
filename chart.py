@@ -60,6 +60,48 @@ def plot_together(data, labels, filename):
     plt.savefig(f"out/{filename}.png", dpi=300)
 
 
+def plot_random_sorted_rev(algo, data, data_sorted, data_revsorted):
+    plt.clf()
+    x = np.array([int(i) for i in data_sorted.keys()])
+
+    # sorted and revsorted have shape (15,) but data has shape (30,)
+    # so we need to take only the first 15 elements
+    data_15 = {k: v for k, v in data.items() if int(k) <= 150000}
+
+    fig, ax = plt.subplots()
+
+    measured_avg = np.array([np.mean(data_15[i][algo]) for i in data_15.keys()])
+    plt.plot(x, measured_avg, label="array aleatória", linewidth=2)
+    std = np.array([np.std(data_15[i][algo]) for i in data_15.keys()])
+    plt.errorbar(
+        x, measured_avg, yerr=std, fmt="none", ecolor="black", capsize=2, linewidth=1
+    )
+
+    measured_avg = np.array([np.mean(data_sorted[i][algo]) for i in data_sorted.keys()])
+    plt.plot(x, measured_avg, label="array ordenada (asc)", linewidth=2)
+    std = np.array([np.std(data_sorted[i][algo]) for i in data_sorted.keys()])
+    plt.errorbar(
+        x, measured_avg, yerr=std, fmt="none", ecolor="black", capsize=2, linewidth=1
+    )
+
+    measured_avg = np.array([np.mean(data_revsorted[i][algo]) for i in data_revsorted.keys()])
+    plt.plot(x, measured_avg, label="array ordenada (desc)", linewidth=2)
+    std = np.array([np.std(data_revsorted[i][algo]) for i in data_revsorted.keys()])
+    plt.errorbar(
+        x, measured_avg, yerr=std, fmt="none", ecolor="black", capsize=2, linewidth=1
+    )
+
+    ax.set(
+        xlabel="n (tamanho do array)",
+        ylabel="tempo (ciclos)",
+        title=f"{algo.capitalize()} Sort",
+    )
+    ax.legend()
+    ax.grid()
+
+    fig.set_size_inches(7, 5)
+    fig.savefig(f"out/{algo}-all3.png", dpi=300)
+
 # with open("out/data_sorted.json") as f:
 with open("out/data.json") as f:
     data = json.load(f)
@@ -91,3 +133,13 @@ with open("out/data.json") as f:
     # plot("merge", n_log_n, "n*log(n)", data)
     # plot("heap", n_log_n, "n*log(n)", data)
     # plot("quick", n_2, "n*log(n)", data)
+
+# data = json.load(open("out/data.json"))
+# data_sorted = json.load(open("out/data_sorted.json"))
+# data_revsorted = json.load(open("out/data_revsorted.json"))
+
+# plot_random_sorted_rev("insertion", data, data_sorted, data_revsorted)
+# plot_random_sorted_rev("selection", data, data_sorted, data_revsorted)
+# plot_random_sorted_rev("merge", data, data_sorted, data_revsorted)
+# plot_random_sorted_rev("heap", data, data_sorted, data_revsorted)
+# plot_random_sorted_rev("quick", data, data_sorted, data_revsorted)
